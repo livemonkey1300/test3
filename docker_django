@@ -15,9 +15,11 @@ WORKDIR /usr/src/app
 
 
 ADD https://raw.githubusercontent.com/livemonkey1300/test3/master/run.sh ./run.sh
-RUN echo "export ADMIN=$ADMIN" > ./runner \
+RUN pip install --upgrade virtualenv \
+	&& echo "export ADMIN=$ADMIN" > ./runner \
 	&& echo "export EMAIL=$EMAIL" >> ./runner \
 	&& echo "export ADMIN_PASS=$ADMIN_PASS" >> ./runner \
+	&& virtualenv env \
 	&& /bin/bash -c "source env/bin/activate" \
 	&& /bin/bash -c "source ./runner" \
 	&& chmod 777 ./run.sh \
