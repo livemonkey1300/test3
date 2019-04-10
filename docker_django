@@ -1,0 +1,26 @@
+FROM python:3.6
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        postgresql-client \
+    && rm -rf /var/lib/apt/lists/*
+
+	
+ENV ADMIN admin
+ENV EMAIL admin@noreply
+ENV ADMIN_PASS adminpass
+
+
+WORKDIR /usr/src/app
+
+
+ADD https://raw.githubusercontent.com/livemonkey1300/test3/master/run.sh ./run.sh
+RUN echo "export ADMIN=$ADMIN" > ./runner \
+	&& echo "export EMAIL=$EMAIL" >> ./runner \
+	&& echo "export ADMIN_PASS=$ADMIN_PASS" >> ./runner \
+	&& chmod 777 ./run.sh \
+	&& ./run.sh
+
+	
+EXPOSE 8000
+CMD ["python", "main/manage.py", "runserver", "0.0.0.0:8000"]
