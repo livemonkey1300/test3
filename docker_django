@@ -18,6 +18,8 @@ ADD https://raw.githubusercontent.com/livemonkey1300/test3/master/run.sh ./run.s
 RUN echo "export ADMIN=$ADMIN" > ./runner \
 	&& echo "export EMAIL=$EMAIL" >> ./runner \
 	&& echo "export ADMIN_PASS=$ADMIN_PASS" >> ./runner \
+	&& /bin/bash -c "source env/bin/activate" \
+	&& /bin/bash -c "source ./runner" \
 	&& chmod 777 ./run.sh \
 	&& ./run.sh
 
