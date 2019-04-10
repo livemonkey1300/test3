@@ -1,9 +1,5 @@
 #!/bin/bash
 
-source ./runner
-pip install --upgrade virtualenv
-virtualenv env
-source env/bin/activate
 pip install djangocms-installer
 djangocms main
 python main/manage.py makemigrations
